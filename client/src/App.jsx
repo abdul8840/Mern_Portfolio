@@ -5,6 +5,7 @@ import Header from './components/Header';
 import About from './pages/About';
 import SignUp from './pages/SignUp';
 import SingIn from './pages/SingIn';
+import Dashboard from './pages/Dashboard';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <Route path="/about" element={<About />} />
       <Route path='/sign-up' element={<SignUp />} />
       <Route path='/sign-in' element={<SingIn />} />
+      <Route path='/dashboard' element={<Dashboard />} />
     </Routes>
     </BrowserRouter>
   )
