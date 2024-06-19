@@ -1,12 +1,15 @@
 import { Avatar, Button, Dropdown, DropdownDivider, Navbar } from 'flowbite-react';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaMoon } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { FaMoon, FaSun } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import {toggleTheme} from '../redux/theme/themeSlice';
 
 const Header = () => {
   const path = useLocation().pathname; 
-  const currentUser = useSelector(state => state.user)
+  const dispatch = useDispatch();
+  const {currentUser} = useSelector((state) => state.user);
+  const {theme} = useSelector((state) => state.theme);
 
   return (
     <div className="border-b-2">
@@ -16,8 +19,8 @@ const Header = () => {
         </Link>
         
         <div className="flex gap-2 md:order-2">
-          <Button className='w-12 h-10 hidden sm:inline' color='gray' pill>
-            <FaMoon />
+          <Button className='w-12 h-10 hidden sm:inline' color='gray' pill onClick={() => dispatch(toggleTheme())}>
+            {theme === 'light' ? <FaSun /> : <FaMoon />}
           </Button>
 
           {currentUser ? (
@@ -57,12 +60,12 @@ const Header = () => {
           <Navbar.Toggle />
         </div>
 
-        <Navbar.Collapse className="md:max-w-20 text-black md:flex md:items-center">
+        <Navbar.Collapse className="md:max-w-20 md:flex md:items-center dark:text-white">
           <Navbar.Link active={path === '/'} as='div'>
-            <Link to='/' className={path === '/' ? 'text-blue-500 block py-2 pr-4 pl-3 md:p-0' : 'text-black block py-2 pr-4 pl-3 md:p-0'}>Home</Link>
+            <Link to='/' className={path === '/' ? 'text-blue-500 block py-2 pr-4 pl-3 md:p-0' : 'block py-2 pr-4 pl-3 md:p-0'}>Home</Link>
           </Navbar.Link>
           <Navbar.Link active={path === '/about'} as='div'>
-            <Link to='/about' className={path === '/about' ? 'text-blue-500 block py-2 pr-4 pl-3 md:p-0' : 'text-black block py-2 pr-4 pl-3 md:p-0'}>About</Link>
+            <Link to='/about' className={path === '/about' ? 'text-blue-500 block py-2 pr-4 pl-3 md:p-0' : 'block py-2 pr-4 pl-3 md:p-0'}>About</Link>
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
