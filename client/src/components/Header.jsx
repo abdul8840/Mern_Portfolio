@@ -4,12 +4,29 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import {toggleTheme} from '../redux/theme/themeSlice';
+import { signoutSuccess } from '../redux/user/userSlice';
 
 const Header = () => {
   const path = useLocation().pathname; 
-  const dispatch = useDispatch();
   const {currentUser} = useSelector((state) => state.user);
   const {theme} = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch('/api/user/signout', {
+        method: 'POST',
+      });
+      const data = await res.json()
+      if(!res.ok) {
+        console.log(data.message)
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   return (
     <div className="border-b-2">
@@ -43,9 +60,7 @@ const Header = () => {
               <Dropdown.Item>Profile</Dropdown.Item>
               </Link>
               <DropdownDivider />
-              <Link to='/sign-out'>
-              <Dropdown.Item>Sign Out</Dropdown.Item>
-              </Link>
+              <Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
             </Dropdown>
           ) : (
             <Link to='/sign-in'>
