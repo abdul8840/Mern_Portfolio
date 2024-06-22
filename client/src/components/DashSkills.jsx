@@ -12,8 +12,6 @@ const DashSkills = () => {
   const [showModal, setShowModal] = useState(false);
   const [skillIdToDelete, setSkillIdToDelete] = useState('')
 
-  console.log(userSkills)
-
   useEffect(() => {
     const fetchSkills = async () => {
       try {
