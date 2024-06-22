@@ -10,6 +10,7 @@ import PrivateRoute from './components/PrivateRoute';
 import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
+import CreateSkill from './pages/CreateSkill';
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
       <Route element={<OnlyAdminPrivateRoute />} >
         <Route path='/create-post' element={<CreatePost />} />
         <Route path='/update-post/:postId' element={<UpdatePost />} />
+        <Route path='/create-skill' element={<CreateSkill />} />
       </Route>
     </Routes>
     </BrowserRouter>

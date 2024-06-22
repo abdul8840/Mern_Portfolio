@@ -1,17 +1,18 @@
-import { Button } from 'flowbite-react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Button } from "flowbite-react";
+import React from "react";
+import { Link } from "react-router-dom";
+
 
 const DashSkills = () => {
   return (
     <div>
-      <Link to='/create-skills'>
-        <Button gradientDuoTone="purpleToPink" >
-          Add Skill
-        </Button>
+      <Link to="/create-skill">
+        <Button gradientDuoTone="purpleToPink">Add Skill</Button>
       </Link>
+      
+      ;
     </div>
-  )
-}
+  );
+};
 
-export default DashSkills
+export default DashSkills;
