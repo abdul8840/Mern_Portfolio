@@ -41,7 +41,7 @@ const MySkills = () => {
   };
 
   return (
-    <div className="mb-20">
+    <div className="min-h-screen">
       <div className="mb-6">
         <h2 className="text-center text-4xl font-bold">My Skills</h2>
         <p className="text-center text-lg font-semibold text-gray-500">
@@ -51,7 +51,7 @@ const MySkills = () => {
 
       <Tabs
         variant="pills"
-        className="flex gap-4 text-bold justify-center"
+        className="flex mt-10 gap-4 text-bold justify-center"
         selectedIndex={activeTab}
         onSelect={handleTabChange}
       >

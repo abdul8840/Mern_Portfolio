@@ -6,7 +6,7 @@ import { IoDocumentText } from "react-icons/io5";
 
 const About = () => {
   return (
-    <div className='mb-20'>
+    <div className='min-h-screen'>
       <div className="mb-14">
         <h2 className='text-center text-4xl font-bold'>About Me</h2>
         <p className='text-center text-lg font-semibold text-gray-500'>My Introduction</p>
