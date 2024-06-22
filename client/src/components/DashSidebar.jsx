@@ -62,6 +62,18 @@ const DashSidebar = () => {
           </Link>
           )}
 
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=skills">
+            <Sidebar.Item
+              active={tab === "skills"}
+              icon={HiDocumentText}
+              as="div"
+            >
+              Skills
+            </Sidebar.Item>
+          </Link>
+          )}
+
           <Sidebar.Item
             icon={HiArrowSmRight}
             className="cursor-pointer"

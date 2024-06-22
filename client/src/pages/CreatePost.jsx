@@ -72,7 +72,8 @@ const CreatePost = () => {
       }
       if (res.ok) {
         setPublishError(null)
-        navigate('/')
+        navigate('/dashboard?tab=posts');
+
       }
     } catch (error) {
       setPublishError('Somethin went wrong!')

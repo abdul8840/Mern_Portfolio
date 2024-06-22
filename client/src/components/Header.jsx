@@ -30,7 +30,7 @@ const Header = () => {
 
   return (
     <div className="border-b-2">
-      <Navbar className='max-w-[1000px] mx-auto flex justify-between items-center'>
+      <Navbar className='max-w-5xl mx-auto flex justify-between items-center'>
         <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
           Abdul
         </Link>
