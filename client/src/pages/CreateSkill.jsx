@@ -58,7 +58,7 @@ const CreateSkill = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/post/create', {
+      const res = await fetch('/api/skill/createskill', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const CreateSkill = () => {
       }
       if (res.ok) {
         setPublishError(null)
-        navigate('/dashboard?tab=posts');
+        navigate('/dashboard?tab=skills');
 
       }
     } catch (error) {
@@ -91,7 +91,7 @@ const CreateSkill = () => {
             required={true}
             className="flex-1"
             onChange={(e) => 
-              setFormData({ ...formData, title: e.target.value })
+              setFormData({ ...formData, technology: e.target.value })
             }
           />
           <Select
@@ -112,7 +112,7 @@ const CreateSkill = () => {
           placeholder="Enter You Skill Percentage"
           required={true}
           onChange={(e) => 
-            setFormData({ ...formData, description: e.target.value })
+            setFormData({ ...formData, percent: e.target.value })
           }
         />
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
