@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Tabs, TabItem } from "flowbite-react";
 
 const MySkills = () => {
   const [userSkills, setUserSkills] = useState([]);
   const [filteredSkills, setFilteredSkills] = useState([]);
-  const [activeTab, setActiveTab] = useState("all"); // Default tab
+  const [item, setItem] = useState({ category: "all" });
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
     const fetchSkills = async () => {
@@ -14,8 +14,8 @@ const MySkills = () => {
         const res = await fetch(`/api/skill/getskills`);
         const data = await res.json();
         if (res.ok) {
-          setUserSkills(data.skills);
-          setFilteredSkills(data.skills); // Initially show all skills
+          setUserSkills(data.skills); // corrected from data.Skills to data.skills
+          setFilteredSkills(data.skills); // same correction here
         }
       } catch (error) {
         console.log(error);
@@ -24,21 +24,26 @@ const MySkills = () => {
     fetchSkills();
   }, []);
 
-  const handleTabChange = (tabId) => {
-    setActiveTab(tabId);
-    filterSkillsByCategory(tabId);
-  };
-
-  const filterSkillsByCategory = (category) => {
-    if (category === "all") {
+  useEffect(() => {
+    if (item.category === "all") {
       setFilteredSkills(userSkills);
     } else {
       const filtered = userSkills.filter(
-        (skill) => skill.category.toLowerCase() === category.toLowerCase()
+        (skill) => skill.category === item.category
       );
       setFilteredSkills(filtered);
     }
+  }, [item, userSkills]);
+
+  const handleClick = (e, index) => {
+    setItem({ category: e.target.textContent });
+    setActive(index);
   };
+
+  const categories = [
+    "all",
+    ...new Set(userSkills.map((skill) => skill.category)),
+  ];
 
   return (
     <div className="min-h-screen">
@@ -49,28 +54,19 @@ const MySkills = () => {
         </p>
       </div>
 
-      <Tabs
-        variant="pills"
-        className="flex mt-10 gap-4 text-bold justify-center"
-        selectedIndex={activeTab}
-        onSelect={handleTabChange}
-      >
-        <TabItem eventKey="all" title="All">
-          <p className="text-sm text-gray-500 dark:text-gray-400">All Skills</p>
-        </TabItem>
-        <TabItem eventKey="frontend" title="Frontend">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Frontend</p>
-        </TabItem>
-        <TabItem eventKey="backend" title="Backend">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Backend</p>
-        </TabItem>
-        <TabItem eventKey="technology" title="Other Technology">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Other Technology</p>
-        </TabItem>
-        <TabItem eventKey="programming" title="Programming Language">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Programming Language</p>
-        </TabItem>
-      </Tabs>
+      <div className="flex flex-wrap justify-center items-center gap-5 mb-6">
+        {categories.map((category, index) => (
+          <span
+            onClick={(e) => handleClick(e, index)}
+            className={`${
+              active === index ? "bg-[#333] text-white" : ""
+            } py-2 px-3 rounded-[7px] uppercase cursor-pointer`}
+            key={index}
+          >
+            {category}
+          </span>
+        ))}
+      </div>
 
       <div className="w-full flex flex-wrap items-center justify-center gap-10 md:gap-5">
         {filteredSkills.map((skill) => (
