@@ -14,8 +14,8 @@ const MySkills = () => {
         const res = await fetch(`/api/skill/getskills`);
         const data = await res.json();
         if (res.ok) {
-          setUserSkills(data.skills); // corrected from data.Skills to data.skills
-          setFilteredSkills(data.skills); // same correction here
+          setUserSkills(data.skills); 
+          setFilteredSkills(data.skills); 
         }
       } catch (error) {
         console.log(error);

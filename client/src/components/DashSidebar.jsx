@@ -2,6 +2,8 @@ import { Sidebar } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiUser, HiArrowSmRight, HiDocumentText } from "react-icons/hi";
+import { FaServicestack } from "react-icons/fa";
+import { GiSkills } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
 
@@ -66,10 +68,22 @@ const DashSidebar = () => {
             <Link to="/dashboard?tab=skills">
             <Sidebar.Item
               active={tab === "skills"}
-              icon={HiDocumentText}
+              icon={GiSkills}
               as="div"
             >
               Skills
+            </Sidebar.Item>
+          </Link>
+          )}
+
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=services">
+            <Sidebar.Item
+              active={tab === "services"}
+              icon={FaServicestack}
+              as="div"
+            >
+              Services
             </Sidebar.Item>
           </Link>
           )}
