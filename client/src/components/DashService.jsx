@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Table, Button } from 'flowbite-react';
+import { Table, Button, Modal } from 'flowbite-react';
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const DashService = () => {
   const [userServices, setUserServices] = useState([]);
   const { currentUser } = useSelector((state) => state.user);
   const [showMore, setShowMore] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [serviceIdToDelete, setserviceIdToDelete] = useState('')
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -45,6 +48,24 @@ const DashService = () => {
         console.log(error.message);
       }
 
+  }
+
+  const handleDeleteService = async() => {
+    setShowModal(false)
+    try {
+      const res = await fetch(`api/service/deleteservice/${serviceIdToDelete}/${currentUser._id}`,{
+        method: 'DELETE',
+      })
+      const data = await res.json()
+      if(!res.ok){
+        console.log(data.error)
+      } else {
+        setUserServices(userServices.filter((service) => service._id !== serviceIdToDelete));
+      }
+    } catch (error) {
+      console.log(error.message);
+      
+    }
   }
 
 
@@ -95,10 +116,10 @@ const DashService = () => {
                   <Table.Cell>{service.serviceDescription}</Table.Cell>
                   <Table.Cell>
                   <span
-                      // onClick={() => {
-                      //   setShowModal(true);
-                      //   setPostIdToDelete(post._id);
-                      // }}
+                      onClick={() => {
+                        setShowModal(true);
+                        setserviceIdToDelete(service._id);
+                      }}
                       className='font-medium text-red-500 hover:underline cursor-pointer'
                     >
                       Delete
@@ -127,6 +148,30 @@ const DashService = () => {
       ) : (
         <p>You have no services yet!</p>
       )}
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size="md"
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete this post
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="failure" onClick={handleDeleteService}>
+                Yes, I'm sure
+              </Button>
+              <Button color="gray" onClick={() => setShowModal(false)}>
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
