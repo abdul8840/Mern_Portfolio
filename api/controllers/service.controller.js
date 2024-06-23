@@ -24,3 +24,42 @@ export const createservice = async (req, res, next) => {
     
   
 }
+
+export const getservices = async (req,res,next) => {
+  try {
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 9;
+    const sortDirection = req.query.order === 'asc' ? 1 : -1;
+    const services = await Service.find({
+      ...(req.query.userId && { userId: req.query.userId }),
+      ...(req.query.servicesTitle && { servicesTitle: req.query.servicesTitle }),
+      ...(req.query.serviceDescription && { serviceDescription: req.query.serviceDescription }),
+      ...(req.query.serviceId && { _id: req.query.serviceId }),
+    })
+      .sort({ updatedAt: sortDirection })
+      .skip(startIndex)
+      .limit(limit);
+
+    const totalServices = await Service.countDocuments();
+
+    const now = new Date();
+
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+
+    const lastMonthServices = await Service.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
+
+    res.status(200).json({
+      services,
+      totalServices,
+      lastMonthServices,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
