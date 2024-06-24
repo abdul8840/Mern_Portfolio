@@ -80,7 +80,7 @@ const Header = () => {
             <Link to='/' className={path === '/' ? 'text-blue-500 block py-2 pr-4 pl-3 md:p-0' : 'block py-2 pr-4 pl-3 md:p-0'}>Home</Link>
           </Navbar.Link>
           <Navbar.Link active={path === '/about'} as='div'>
-            <Link to='/about' className={path === '/about' ? 'text-blue-500 block py-2 pr-4 pl-3 md:p-0' : 'block py-2 pr-4 pl-3 md:p-0'}>About</Link>
+            <Link to='/reviews' className={path === '/reviews' ? 'text-blue-500 block py-2 pr-4 pl-3 md:p-0' : 'block py-2 pr-4 pl-3 md:p-0'}>Testimonials</Link>
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>

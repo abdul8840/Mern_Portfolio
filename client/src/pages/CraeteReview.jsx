@@ -1,4 +1,4 @@
-import { Button, TextInput } from "flowbite-react";
+import { Button, Textarea, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
@@ -50,8 +50,8 @@ const CreateReview = () => {
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
-          <fieldset className="starability-slot">
-            <legend>First rating:</legend>
+          <fieldset className="starability-slot mt-10">
+            <h1 className="text-xl mb-2 font-bold">Give Stars :</h1>
             <input type="radio" id="no-rate" className="input-no-rate" name="rating" value="0" aria-label="No rating." onChange={handleRatingChange} />
             <input type="radio" id="first-rate1" name="rating" value="1" onChange={handleRatingChange} />
             <label htmlFor="first-rate1" title="Terrible">1 star</label>
@@ -65,11 +65,14 @@ const CreateReview = () => {
             <label htmlFor="first-rate5" title="Amazing">5 stars</label>
           </fieldset>
         </div>
-        <TextInput
+        <h1 className="text-xl my-2 font-bold">Write Something :</h1>
+        <Textarea
           id="review"
           type="text"
+          className="mt-3"
           placeholder="Write Your Review"
           required={true}
+          rows={8}
           onChange={(e) => {
             setFormData({ ...formData, review: e.target.value });
           }}

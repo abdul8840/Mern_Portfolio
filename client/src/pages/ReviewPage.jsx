@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaUserAlt } from "react-icons/fa";
 
-const Review = () => {
+const ReviewPage = () => {
   const [userRating, setUserRating] = useState([]);
   const [userData, setUserData] = useState({});
   const { currentUser } = useSelector((state) => state.user);
@@ -11,7 +11,7 @@ const Review = () => {
   useEffect(() => {
     const fetchRatings = async () => {
       try {
-        const res = await fetch("/api/rating/getratings?limit=12");
+        const res = await fetch("/api/rating/getratings");
         const data = await res.json();
         if (res.ok) {
           setUserRating(data);
@@ -43,9 +43,10 @@ const Review = () => {
     });
   }, [userRating, userData]);
 
+
   return (
-    <div className="mb-20">
-      <div className="mb-6">
+    <div className="p-3 max-w-5xl mx-auto min-h-screen mt-10">
+      <div className="mb-10">
         <h2 className="text-center text-4xl font-bold">Testimonials</h2>
         <p className="text-center text-lg font-semibold text-gray-500">
           My Clients
@@ -58,7 +59,7 @@ const Review = () => {
         </p>
       ) : (
         <>
-          <div className="mb-4 flex justify-between">
+          <div className="mb-4 flex flex-col sm:flex-row justify-between">
             <div className="">
               <p className="font-bold text-md md:text-lg">
                 Total Testimonials :{" "}
@@ -72,10 +73,10 @@ const Review = () => {
             </div>
           </div>
 
-          <div className="flex items-center overflow-x-scroll hide-scrollbar gap-5">
+          <div className="w-full mb-10 flex flex-wrap justify-center items-center gap-5">
             {userRating.map((rating) => (
               <div
-                className="w-[250px] border-2 border-gray-500 text-center rounded-[1rem] p-[1.25rem]"
+                className="w-[300px] border-2 border-gray-500 text-center rounded-[1rem] p-[1.25rem]"
                 key={rating._id}
               >
                 <div className="">
@@ -98,19 +99,15 @@ const Review = () => {
                 <p className="starability-result" data-rating={rating.rating}>
                   Rated: {rating.rating} stars
                 </p>
-                <p className="mt-3 text-md">{rating.review}</p>
+                <p className="mt-5 text-md ">{rating.review}</p>
               </div>
             ))}
           </div>
         </>
       )}
-      <div className="mt-5 text-center">
-      <Link to="/create-rating">
-                <span className="text-cyan-500">See More Testimonials</span>
-              </Link>
-      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Review;
+
+export default ReviewPage
