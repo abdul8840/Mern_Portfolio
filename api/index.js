@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.route.js';
 import postRoutes from './routes/post.route.js';
 import skillRoutes from './routes/skill.route.js';
 import serviceRoutes from './routes/service.route.js';
+import ratingRoutes from './routes/rating.route.js';
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -32,6 +33,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/skill', skillRoutes);
 app.use('/api/service', serviceRoutes);
+app.use('/api/rating', ratingRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

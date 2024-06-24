@@ -12,6 +12,7 @@ import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
 import CreateSkill from './pages/CreateSkill';
 import CreateService from './pages/CreateService';
+import CraeteReview from './pages/CraeteReview';
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path='/create-skill' element={<CreateSkill />} />
         <Route path='/create-service' element={<CreateService />} />
       </Route>
+      <Route path='/create-rating' element={<CraeteReview />} />
     </Routes>
     </BrowserRouter>
   )
