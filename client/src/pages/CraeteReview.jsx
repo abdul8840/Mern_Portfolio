@@ -1,12 +1,14 @@
 import { Button, TextInput } from "flowbite-react";
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';  // Ensure you import useNavigate if you're using it for navigation
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import '../App.css'
 
 const CreateReview = () => {
-  const [formData, setFormData] = useState({ rating: 0, review: '' });
+  const {currentUser} = useSelector((state) => state.user)
+  const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
-  const navigate = useNavigate();  // Ensure useNavigate hook is used for navigation
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,9 +18,16 @@ const CreateReview = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          userId: currentUser._id,
+          rating: formData.rating,
+          review: formData.review,
+        }),
       });
       const data = await res.json();
+      if(res.ok){
+        setFormData('')
+      }
       if (!res.ok) {
         setPublishError(data.message || 'Something went wrong');
       } else {
