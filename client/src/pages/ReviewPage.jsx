@@ -71,13 +71,7 @@ const ReviewPage = () => {
         </p>
       </div>
 
-      {userRating.length === 0 ? (
-        <p className="text-center text-lg my-5 font-semibold text-gray-500">
-          No Testimonials Yet
-        </p>
-      ) : (
-        <>
-          <div className="mb-4 flex flex-col gap-5 justify-center sm:flex-row sm:justify-between">
+      <div className="mb-4 flex justify-between">
             <div className="">
               <p className="font-bold text-md md:text-lg">
                 Total Testimonials :{" "}
@@ -86,10 +80,24 @@ const ReviewPage = () => {
             </div>
             <div className="">
               <Link to="/create-rating">
-                <button type="button" className="border-2 border-gray-800 py-1 px-3 font-bold rounded-md hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">Add Testimonial</button>
+                <button
+                  type="button"
+                  className="border-2 border-gray-800 py-1 px-3 font-bold rounded-md hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+                >
+                  Add Testimonial
+                </button>
               </Link>
             </div>
           </div>
+
+      {userRating.length === 0 ? (
+        <>
+        <p className="text-center text-lg my-5 font-semibold text-gray-500">
+          No Testimonials Yet
+        </p>
+        </>
+      ) : (
+        <>
 
           <div className="w-full mb-10 flex flex-wrap justify-center items-center gap-5">
             {userRating.map((rating) => (

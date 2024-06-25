@@ -70,13 +70,7 @@ const Review = () => {
         </p>
       </div>
 
-      {userRating.length === 0 ? (
-        <p className="text-center text-lg my-5 font-semibold text-gray-500">
-          No Testimonials Yet
-        </p>
-      ) : (
-        <>
-          <div className="mb-4 flex justify-between">
+      <div className="mb-4 flex justify-between">
             <div className="">
               <p className="font-bold text-md md:text-lg">
                 Total Testimonials :{" "}
@@ -94,6 +88,16 @@ const Review = () => {
               </Link>
             </div>
           </div>
+
+      {userRating.length === 0 ? (
+        <>
+        
+        <p className="text-center text-lg my-5 font-semibold text-gray-500">
+          No Testimonials Yet
+        </p>
+        </>
+      ) : (
+        <>
 
           <div className="flex items-center overflow-x-scroll hide-scrollbar gap-5">
             {userRating.map((rating) => (

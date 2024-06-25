@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiUser, HiArrowSmRight, HiDocumentText } from "react-icons/hi";
 import { FaServicestack } from "react-icons/fa";
+import { MdFeedback } from "react-icons/md";
 import { GiSkills } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
@@ -84,6 +85,18 @@ const DashSidebar = () => {
               as="div"
             >
               Services
+            </Sidebar.Item>
+          </Link>
+          )}
+
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=ratings">
+            <Sidebar.Item
+              active={tab === "ratings"}
+              icon={MdFeedback}
+              as="div"
+            >
+              Ratings
             </Sidebar.Item>
           </Link>
           )}
