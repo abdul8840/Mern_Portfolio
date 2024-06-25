@@ -62,7 +62,7 @@ const Review = () => {
   };
 
   return (
-    <div className="mb-20">
+    <div id="review" className="mb-20">
       <div className="mb-6">
         <h2 className="text-center text-4xl font-bold">Testimonials</h2>
         <p className="text-center text-lg font-semibold text-gray-500">

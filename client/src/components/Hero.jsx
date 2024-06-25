@@ -9,13 +9,15 @@ const Hero = () => {
     <div className="w-full min-h-[90vh] py-10 flex flex-col md:flex-row items-center gap-10 md:gap-20">
       {/* links */}
       <div className="text-xl flex flex-row md:flex-col gap-6 dark:text-white">
-        <Link to="">
+        <Link to="https://github.com/abdul8840?tab=repositories
+" target="_blank" rel="noreferrer">
           <FaGithub />
         </Link>
-        <Link to="">
+        <Link to="https://www.linkedin.com/in/abdul-rahman-290662220
+" target="_blank" rel="noreferrer">
           <FaLinkedin />
         </Link>
-        <Link to="">
+        <Link to='#' >
           <FaDiscord />
         </Link>
       </div>
