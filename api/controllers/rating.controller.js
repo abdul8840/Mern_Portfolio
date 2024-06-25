@@ -34,40 +34,21 @@ export const getrating = async (req, res, next) => {
     next(error)
     
   }
-  // try {
-  //   const startIndex = parseInt(req.query.startIndex) || 0;
-  //   const limit = parseInt(req.query.limit) || 9;
-  //   const sortDirection = req.query.order === 'asc' ? 1 : -1;
-  //   const ratings = await Rating.find({
-  //     ...(req.query.userId && { userId: req.query.userId }),
-  //     ...(req.query.rating && { rating: req.query.rating }),
-  //     ...(req.query.service && { service: req.query.service }),
-  //     ...(req.query.ratingId && { _id: req.query.ratingId }),
-  //   })
-  //     .sort({ updatedAt: sortDirection })
-  //     .skip(startIndex)
-  //     .limit(limit);
-
-  //   const totalRating = await Rating.countDocuments();
-
-  //   const now = new Date();
-
-  //   const oneMonthAgo = new Date(
-  //     now.getFullYear(),
-  //     now.getMonth() - 1,
-  //     now.getDate()
-  //   );
-
-  //   const lastMonthRating = await Rating.countDocuments({
-  //     createdAt: { $gte: oneMonthAgo },
-  //   });
-
-  //   res.status(200).json({
-  //     ratings,
-  //     totalRating,
-  //     lastMonthRating,
-  //   });
-  // } catch (error) {
-  //   next(error);
-  // }
 };
+
+export const deleterating = async (req, res, next) => {
+  try {
+    const rating = await Rating.findById(req.params.ratingId);
+    if (!rating) {
+      return next(errorHandler(404, 'Rating not found'));
+    }
+    if(rating.userId != req.user.id && !req.user.isAdmin === false){
+      next(errorHandler(403, 'You are not allowed to delete this review'));
+    }
+    await Rating.findByIdAndDelete(req.params.ratingId);
+    res.status(200).json( 'Rating deleted successfully' );
+    
+  } catch (error) {
+    next(error)
+  }
+}

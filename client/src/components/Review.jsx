@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAlt, FaTrash } from "react-icons/fa";
 
 const Review = () => {
   const [userRating, setUserRating] = useState([]);
@@ -43,6 +43,24 @@ const Review = () => {
     });
   }, [userRating, userData]);
 
+  const handleDeleteRating = async (ratingId) => {
+    try {
+      const res = await fetch(`/api/rating/deleterating/${ratingId}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.error);
+      } else {
+        setUserRating((prevRatings) =>
+          prevRatings.filter((rating) => rating._id !== ratingId)
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="mb-20">
       <div className="mb-6">
@@ -67,7 +85,12 @@ const Review = () => {
             </div>
             <div className="">
               <Link to="/create-rating">
-                <button type="button" className="border-2 border-gray-800 py-1 px-3 font-bold rounded-md hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">Add Testimonial</button>
+                <button
+                  type="button"
+                  className="border-2 border-gray-800 py-1 px-3 font-bold rounded-md hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+                >
+                  Add Testimonial
+                </button>
               </Link>
             </div>
           </div>
@@ -78,6 +101,15 @@ const Review = () => {
                 className="w-[250px] border-2 border-gray-500 text-center rounded-[1rem] p-[1.25rem]"
                 key={rating._id}
               >
+                {currentUser &&
+                  (currentUser._id === rating.userId || currentUser.isAdmin) && (
+                    <span
+                      onClick={() => handleDeleteRating(rating._id)}
+                      className="text-sm cursor-pointer float-end"
+                    >
+                      <FaTrash />
+                    </span>
+                  )}
                 <div className="">
                   {userData[rating.userId]?.profilePicture ? (
                     <img
@@ -105,9 +137,9 @@ const Review = () => {
         </>
       )}
       <div className="mt-5 text-center">
-      <Link to="/create-rating">
-                <span className="text-cyan-500">See More Testimonials</span>
-              </Link>
+        <Link to="/create-rating">
+          <span className="text-cyan-500">See More Testimonials</span>
+        </Link>
       </div>
     </div>
   );

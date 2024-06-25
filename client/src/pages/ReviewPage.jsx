@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAlt, FaTrash } from "react-icons/fa";
 
 const ReviewPage = () => {
   const [userRating, setUserRating] = useState([]);
@@ -43,6 +43,24 @@ const ReviewPage = () => {
     });
   }, [userRating, userData]);
 
+  const handleDeleteRating = async (ratingId) => {
+    try {
+      const res = await fetch(`/api/rating/deleterating/${ratingId}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.error);
+      } else {
+        setUserRating((prevRatings) =>
+          prevRatings.filter((rating) => rating._id !== ratingId)
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <div className="p-3 max-w-5xl mx-auto min-h-screen mt-10">
@@ -59,7 +77,7 @@ const ReviewPage = () => {
         </p>
       ) : (
         <>
-          <div className="mb-4 flex flex-col sm:flex-row justify-between">
+          <div className="mb-4 flex flex-col gap-5 justify-center sm:flex-row sm:justify-between">
             <div className="">
               <p className="font-bold text-md md:text-lg">
                 Total Testimonials :{" "}
@@ -79,6 +97,16 @@ const ReviewPage = () => {
                 className="w-[300px] border-2 border-gray-500 text-center rounded-[1rem] p-[1.25rem]"
                 key={rating._id}
               >
+                {currentUser &&
+                  (currentUser._id === rating.userId || currentUser.isAdmin) && (
+                    <span
+                      onClick={() => handleDeleteRating(rating._id)}
+                      className="text-sm cursor-pointer float-end"
+                    >
+                      <FaTrash />
+                    </span>
+                  )}
+
                 <div className="">
                   {userData[rating.userId]?.profilePicture ? (
                     <img
