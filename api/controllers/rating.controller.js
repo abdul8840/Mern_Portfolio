@@ -4,7 +4,6 @@ import Rating from '../models/rating.model.js';
 export const createrating = async (req, res, next) => {
   try {
     const { rating, review, userId } = req.body;
-    // const userId = req.user.id;
     if(userId != req.user.id){
       next(errorHandler(403, 'You are not allowed to create review'));
     }

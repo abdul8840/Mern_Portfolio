@@ -46,7 +46,7 @@ const MySkills = () => {
   ];
 
   return (
-    <div className="mt-10 mb-20">
+    <div className="mt-20 mb-20">
       <div className="mb-6">
         <h2 className="text-center text-4xl font-bold">My Skills</h2>
         <p className="text-center text-lg font-semibold text-gray-500">

@@ -5,6 +5,7 @@ import MySkills from '../components/MySkills'
 import Portfolio from '../components/Portfolio'
 import Services from '../components/Services'
 import Review from '../components/Review'
+import Contact from '../components/Contact'
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Services />
       <Portfolio />
       <Review />
+      <Contact />
     </div>
   )
 }
