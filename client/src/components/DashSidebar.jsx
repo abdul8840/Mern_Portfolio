@@ -2,6 +2,7 @@ import { Sidebar } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiUser, HiArrowSmRight, HiDocumentText } from "react-icons/hi";
+import { MdContactPage } from "react-icons/md";
 import { FaServicestack } from "react-icons/fa";
 import { MdFeedback } from "react-icons/md";
 import { GiSkills } from "react-icons/gi";
@@ -97,6 +98,18 @@ const DashSidebar = () => {
               as="div"
             >
               Ratings
+            </Sidebar.Item>
+          </Link>
+          )}
+
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=contact">
+            <Sidebar.Item
+              active={tab === "contact"}
+              icon={MdContactPage}
+              as="div"
+            >
+              Contact
             </Sidebar.Item>
           </Link>
           )}

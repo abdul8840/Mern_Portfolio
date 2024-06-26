@@ -104,9 +104,9 @@ const Contact = () => {
               onSubmit={handleSubmit}
               className="w-full mt-10 border-2 border-gary-500 p-5 rounded-xl"
             >
-              {errors && (
-                <p className="text-red-500 text-center mb-4">{errors}</p>
-              )}
+              <div className="my-3 text-center text-xl font-bold">
+                Send Message
+              </div>
               <div className="">
                 <TextInput
                   type="text"
@@ -145,6 +145,9 @@ const Contact = () => {
               >
                 Submit
               </Button>
+              {errors && (
+                <Alert color='failure' className=" my-2">{errors}</Alert>
+              )}
             </form>
           </div>
         </div>
