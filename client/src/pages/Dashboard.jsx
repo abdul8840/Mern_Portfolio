@@ -7,6 +7,8 @@ import DashSkills from '../components/DashSkills';
 import DashService from '../components/DashService';
 import DashRating from '../components/DashRating';
 import DashContact from '../components/DashContact';
+import DashUsers from '../components/DashUsers';
+import DashComp from '../components/DashComp';
 
 const Dashboard = () => {
   const location = useLocation();
@@ -24,6 +26,8 @@ const Dashboard = () => {
       <div className="md:w-56">
         <DashSidebar />
       </div>
+      {/* Dashboard */}
+        {tab === 'dash' && <DashComp />}
       {/* profile */}
         {tab === 'profile' && <DashProfile />}
       {/* posts */}
@@ -34,6 +38,8 @@ const Dashboard = () => {
         {tab === 'services' && <DashService />}
       {/* services */}
         {tab === 'ratings' && <DashRating />}
+      {/* users */}
+        {tab === 'users' && <DashUsers />}
       {/* contact */}
         {tab === 'contact' && <DashContact />}
     </div>
