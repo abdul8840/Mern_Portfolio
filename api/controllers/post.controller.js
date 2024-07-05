@@ -71,6 +71,20 @@ export const getposts = async (req, res, next) => {
   }
 };
 
+export const getpost = async (req, res, next) => {
+  try {
+    const posts = await Post.find().sort({
+      createdAt: -1
+    });
+    res.status(200).json(posts);
+    
+    
+  } catch (error) {
+    next(error)
+    
+  }
+};
+
 export const deletepost = async (req, res, next) => {
   if (!req.user.isAdmin || req.user.id !== req.params.userId) {
     return next(errorHandler(403, 'You are not allowed to delete this post'));

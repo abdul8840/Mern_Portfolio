@@ -10,10 +10,10 @@ const Services = () => {
   useEffect(() => {
     const fetchService = async () => {
       try {
-        const res = await fetch("/api/service/getservices");
+        const res = await fetch("/api/service/getservice");
         const data = await res.json();
         if (res.ok) {
-          setUserServices(data.services);
+          setUserServices(data);
         }
       } catch (error) {
         console.log(error);

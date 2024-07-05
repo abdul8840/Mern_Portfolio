@@ -11,11 +11,11 @@ const MySkills = () => {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const res = await fetch(`/api/skill/getskills`);
+        const res = await fetch(`/api/skill/getskill`);
         const data = await res.json();
         if (res.ok) {
-          setUserSkills(data.skills); 
-          setFilteredSkills(data.skills); 
+          setUserSkills(data); 
+          setFilteredSkills(data); 
         }
       } catch (error) {
         console.log(error);

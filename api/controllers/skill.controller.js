@@ -62,6 +62,20 @@ export const getskills = async (req, res, next) => {
   }
 }
 
+export const getskill = async (req, res, next) => {
+  try {
+    const skills = await Skill.find().sort({
+      createdAt: -1
+    });
+    res.status(200).json(skills);
+    
+    
+  } catch (error) {
+    next(error)
+    
+  }
+};
+
 export const deleteskill = async (req, res, next) => {
   if (!req.user.isAdmin || req.user.id !== req.params.userId) {
     return next(errorHandler(403, 'You are not allowed to delete this post'));

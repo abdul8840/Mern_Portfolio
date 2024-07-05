@@ -13,11 +13,11 @@ const Portfolio = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/post/getposts`);
+        const res = await fetch(`/api/post/getpost`);
         const data = await res.json();
         if (res.ok) {
-          setUserPosts(data.posts);
-          setFilteredPosts(data.posts);
+          setUserPosts(data);
+          setFilteredPosts(data);
         }
       } catch (error) {
         console.log(error.message);
