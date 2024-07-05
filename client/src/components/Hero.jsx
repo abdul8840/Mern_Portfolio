@@ -37,10 +37,8 @@ const Hero = () => {
           I'm a creative web designer based in Maharastra India, and i'm very
           passionate and dedicated to my work.
         </p>
-        <Link to='#contact'>
-        <button className="flex gap-2 py-4  bg-[#222] hover:bg-[#111] text-white dark:bg-white dark:text-black font-bold px-8 rounded-[20px] mt-8 md:mt-10 text-xl">Say Hii 
+        <button className="flex gap-2 py-4  bg-[#222] hover:bg-[#111] text-white dark:bg-white dark:text-black font-bold px-8 rounded-[20px] mt-8 md:mt-10 text-xl"><a href="#helloCont">Say Hii</a>
           <FaHandSpock className="mt-1" /></button>
-        </Link>
       </div>
       {/* right side */}
       <div className="">

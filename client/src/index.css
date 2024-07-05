@@ -9,6 +9,10 @@ body{
   height: 100vh;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 .ql-editor{
   font-size: 1.05rem;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroImg from "../assets/abdulpf.jpg";
+import Resume from "../assets/Abdul_Rahman_cv.pdf";
 import { FaBriefcase } from "react-icons/fa";
 import { MdSupportAgent } from "react-icons/md";
 import { IoDocumentText } from "react-icons/io5";
@@ -37,7 +38,7 @@ const About = () => {
               developer with a strong focus on building scalable, efficient, and
               user-friendly applications. </p>
           </div>
-          <a download='' href="" className='w-[250px] flex gap-4 py-4  bg-[#222] hover:bg-[#111] text-white dark:bg-white dark:text-black font-bold px-8 rounded-[20px] mt-8 md:mt-10 text-xl'>Download CV <IoDocumentText className="text-3xl" /></a>
+          <a download='Abdul_Rahman_cv.pdf' href={Resume} className='w-[250px] flex gap-4 py-4  bg-[#222] hover:bg-[#111] text-white dark:bg-white dark:text-black font-bold px-8 rounded-[20px] mt-8 md:mt-10 text-xl'>Download CV <IoDocumentText className="text-3xl" /></a>
         </div>
       </div>
     </div>
